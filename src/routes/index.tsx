@@ -309,10 +309,10 @@ function ServicesTab() {
 
 function GalleryTab() {
   const photos = [
-    { src: metAsset.url, alt: "Metamorfoza — rozjaśnienie z miękkim przejściem", tall: true },
-    { src: met1Asset.url, alt: "Metamorfoza — chłodny blond w falach", tall: true },
-    { src: ava1Asset.url, alt: "Popielaty blond z delikatnymi falami", tall: false },
-    { src: ava2Asset.url, alt: "Rozświetlony blond i precyzyjna linia cięcia", tall: false },
+    { src: metAsset.url, alt: "Metamorfoza — rozjaśnienie z miękkim przejściem" },
+    { src: met1Asset.url, alt: "Metamorfoza — chłodny blond w falach" },
+    { src: ava1Asset.url, alt: "Popielaty blond z delikatnymi falami" },
+    { src: ava2Asset.url, alt: "Rozświetlony blond i precyzyjna linia cięcia" },
   ];
 
   return (
@@ -322,17 +322,17 @@ function GalleryTab() {
         title="Metamorfozy i prace"
         intro="Kilka efektów pracy w salonie — kolor, rozjaśnienia i pielęgnacja włosów."
       />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-2">
         {photos.map((p) => (
           <figure
             key={p.src}
-            className={`overflow-hidden rounded-[1.75rem] shadow-soft ${p.tall ? "lg:row-span-2" : ""}`}
+            className="overflow-hidden rounded-[1.75rem] shadow-soft"
           >
             <img
               src={p.src}
               alt={p.alt}
               loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.04]"
+              className="aspect-[4/5] w-full object-cover transition-transform duration-700 hover:scale-[1.04]"
             />
           </figure>
         ))}
@@ -341,6 +341,7 @@ function GalleryTab() {
     </div>
   );
 }
+
 
 function ReviewsTab() {
   return (
