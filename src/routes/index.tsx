@@ -235,43 +235,37 @@ function StylistTab() {
         title="Ania"
         intro="Fryzjerka z pasją, która słucha, doradza i pracuje tak, by włosy były w coraz lepszej kondycji po każdej wizycie."
       />
-      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <img
-          src={metAsset.url}
-          alt="Metamorfoza włosów — rozjaśnienie z miękkim przejściem od odrostu"
-          className="aspect-[3/4] w-full rounded-[2rem] object-cover shadow-lift"
-        />
-        <div>
-          <h3 className="text-3xl text-foreground">Specjalizacje</h3>
-          <ul className="mt-6 space-y-4">
-            {[
-              ["Koloryzacja", "Dobór odcienia do typu urody, tonowanie, odświeżanie koloru."],
-              ["Baleyage i Air Touch", "Miękkie rozjaśnienia z naturalnym przejściem i odrostem."],
-              [
-                "Precyzyjne strzyżenia",
-                "Damskie i męskie — linia, która ładnie się układa również w domu.",
-              ],
-              [
-                "Zabiegi odbudowujące",
-                "Botoks, keratyna, regeneracja BAOBAB i nawilżanie włosów po rozjaśnianiu.",
-              ],
-            ].map(([title, desc]) => (
-              <li key={title} className="card-elegant p-5">
-                <p className="text-lg text-foreground">{title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-              </li>
-            ))}
-          </ul>
-          <blockquote className="mt-8 border-l-2 border-primary/40 pl-5 text-sm italic leading-relaxed text-muted-foreground">
-            „Pani Ania jest przemiła, a jej podejście do klienta i precyzja w strzyżeniu – na
-            najwyższym poziomie. Fryzjerka z prawdziwą pasją.”
-          </blockquote>
-          <BookButton className="mt-8" >Zarezerwuj wizytę u Ani</BookButton>
-        </div>
+      <div className="mx-auto max-w-3xl">
+        <h3 className="text-3xl text-foreground">Specjalizacje</h3>
+        <ul className="mt-6 space-y-4">
+          {[
+            ["Koloryzacja", "Dobór odcienia do typu urody, tonowanie, odświeżanie koloru."],
+            ["Baleyage i Air Touch", "Miękkie rozjaśnienia z naturalnym przejściem i odrostem."],
+            [
+              "Precyzyjne strzyżenia",
+              "Damskie i męskie — linia, która ładnie się układa również w domu.",
+            ],
+            [
+              "Zabiegi odbudowujące",
+              "Botoks, keratyna, regeneracja BAOBAB i nawilżanie włosów po rozjaśnianiu.",
+            ],
+          ].map(([title, desc]) => (
+            <li key={title} className="card-elegant p-5">
+              <p className="text-lg text-foreground">{title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+            </li>
+          ))}
+        </ul>
+        <blockquote className="mt-8 border-l-2 border-primary/40 pl-5 text-sm italic leading-relaxed text-muted-foreground">
+          „Pani Ania jest przemiła, a jej podejście do klienta i precyzja w strzyżeniu – na
+          najwyższym poziomie. Fryzjerka z prawdziwą pasją.”
+        </blockquote>
+        <BookButton className="mt-8">Zarezerwuj wizytę u Ani</BookButton>
       </div>
     </div>
   );
 }
+
 
 function ServicesTab() {
   return (
@@ -315,10 +309,10 @@ function ServicesTab() {
 
 function GalleryTab() {
   const photos = [
-    { src: metAsset.url, alt: "Metamorfoza — rozjaśnienie z miękkim przejściem", tall: true },
-    { src: met1Asset.url, alt: "Metamorfoza — chłodny blond w falach", tall: true },
-    { src: ava1Asset.url, alt: "Popielaty blond z delikatnymi falami", tall: false },
-    { src: ava2Asset.url, alt: "Rozświetlony blond i precyzyjna linia cięcia", tall: false },
+    { src: metAsset.url, alt: "Metamorfoza — rozjaśnienie z miękkim przejściem" },
+    { src: met1Asset.url, alt: "Metamorfoza — chłodny blond w falach" },
+    { src: ava1Asset.url, alt: "Popielaty blond z delikatnymi falami" },
+    { src: ava2Asset.url, alt: "Rozświetlony blond i precyzyjna linia cięcia" },
   ];
 
   return (
@@ -328,17 +322,17 @@ function GalleryTab() {
         title="Metamorfozy i prace"
         intro="Kilka efektów pracy w salonie — kolor, rozjaśnienia i pielęgnacja włosów."
       />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-2">
         {photos.map((p) => (
           <figure
             key={p.src}
-            className={`overflow-hidden rounded-[1.75rem] shadow-soft ${p.tall ? "lg:row-span-2" : ""}`}
+            className="overflow-hidden rounded-[1.75rem] shadow-soft"
           >
             <img
               src={p.src}
               alt={p.alt}
               loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.04]"
+              className="aspect-[4/5] w-full object-cover transition-transform duration-700 hover:scale-[1.04]"
             />
           </figure>
         ))}
@@ -347,6 +341,7 @@ function GalleryTab() {
     </div>
   );
 }
+
 
 function ReviewsTab() {
   return (
