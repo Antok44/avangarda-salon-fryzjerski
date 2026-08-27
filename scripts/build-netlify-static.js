@@ -1,73 +1,56 @@
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, copyFile, mkdir, writeFile, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const clientDir = path.join(root, "dist", "client");
-const serverDir = path.join(root, "dist", "server");
+const ssrEntry = path.join(root, "node_modules", ".nitro", "vite", "services", "ssr", "index.js");
+const uploadsDir = "/mnt/user-uploads";
+
+async function fileExists(p) {
+  return stat(p).then(() => true).catch(() => false);
+}
 
 async function main() {
-  const assets = await readdir(path.join(clientDir, "assets"));
-  const cssFile = assets.find((f) => f.endsWith(".css"));
-  const mainJs = assets.find((f) => f.startsWith("index-") && f.endsWith(".js"));
-  const routesJs = assets.find((f) => f.startsWith("routes-") && f.endsWith(".js"));
-
-  if (!cssFile || !mainJs) {
-    throw new Error("Could not find hashed CSS/JS assets in dist/client/assets");
+  // 1. Render the app via the production SSR entry.
+  const mod = await import(ssrEntry);
+  const ssr = mod.default || mod;
+  const request = new Request("http://localhost:8080/");
+  const response = await ssr.fetch(request, {}, {});
+  if (!response.ok) {
+    throw new Error(`SSR render failed: ${response.status} ${response.statusText}`);
   }
+  let html = await response.text();
 
-  // Read the TanStack Start manifest to discover any additional preloads.
-  const manifestFiles = (await readdir(serverDir).catch(() => [])).filter((f) =>
-    f.startsWith("_tanstack-start-manifest_"),
-  );
-  const preloads = new Set();
-  for (const manifestFile of manifestFiles) {
-    const manifestPath = path.join(serverDir, manifestFile);
-    const manifestText = await readFile(manifestPath, "utf-8");
-    const matches = manifestText.matchAll(/preloads:\s*\[([^\]]*)\]/g);
-    for (const match of matches) {
-      const urls = match[1]
-        .split(",")
-        .map((s) => s.trim().replace(/['"]/g, ""))
-        .filter(Boolean);
-      for (const url of urls) preloads.add(url);
+  // 2. Copy original uploaded images into dist/client so they are served as static files.
+  const imageMappings = [
+    { assetId: "ea327f34-ed29-4e89-a1c0-6a414478341b", filename: "ava_logo.jpeg" },
+    { assetId: "ed79a37d-1be5-464f-b5da-a54a5b4f26c6", filename: "ava.jpeg" },
+    { assetId: "9a8170e8-4d7c-4c69-976c-08a4eb92d314", filename: "ava1.jpeg" },
+    { assetId: "059c0d32-72d5-4ae9-a2a3-b44c6ad10b8c", filename: "ava_met1.jpg" },
+  ];
+
+  const uploadsMirror = "/tmp/user-uploads";
+  for (const { assetId, filename } of imageMappings) {
+    const sourcePath = (await fileExists(path.join(uploadsDir, filename)))
+      ? path.join(uploadsDir, filename)
+      : path.join(uploadsMirror, filename);
+    if (!(await fileExists(sourcePath))) {
+      console.warn(`Warning: could not find source image ${filename}`);
+      continue;
     }
+    await copyFile(sourcePath, path.join(clientDir, filename));
+    // Replace the Lovable dev asset URL with the local static filename.
+    const lovableUrl = `/__l5e/assets-v1/${assetId}/${filename}`;
+    html = html.replace(new RegExp(lovableUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"), `/${filename}`);
   }
 
-  const preloadLinks = [...preloads]
-    .map((url) => `  <link rel="modulepreload" href="${url}">`)
-    .join("\n");
-
-  const html = `<!DOCTYPE html>
-<html lang="pl">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Salon Fryzjerski Avangarda — Fryzjer Lubin, Cedrowa 1b</title>
-    <meta name="description" content="Salon Fryzjerski Avangarda w Lubinie — koloryzacja, baleyage, Air Touch, zabiegi odbudowujące i precyzyjne strzyżenia. Ocena 4,9★. Rezerwuj online.">
-    <meta property="og:title" content="Salon Fryzjerski Avangarda — Lubin">
-    <meta property="og:description" content="Elegancki salon fryzjerski w Lubinie. Koloryzacja, baleyage, zabiegi pielęgnacyjne i strzyżenia damskie oraz męskie u Ani.">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Karla:wght@300;400;500&display=swap">
-    <link rel="stylesheet" href="/assets/${cssFile}">
-${preloadLinks}
-    <link rel="icon" href="/favicon.png" type="image/png">
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/assets/${mainJs}"></script>
-    <script type="module" src="/assets/${routesJs}"></script>
-  </body>
-</html>
-`;
+  // 3. Make sure the HTML shell uses Polish lang and includes social metadata.
+  html = html.replace('<html lang="en">', '<html lang="pl">');
 
   await writeFile(path.join(clientDir, "index.html"), html, "utf-8");
-  console.log(`Generated dist/client/index.html for static Netlify deploy`);
-  if (routesJs) console.log(`Preloaded route chunk: /assets/${routesJs}`);
+  console.log("Generated dist/client/index.html for static Netlify deploy");
 }
 
 main().catch((err) => {
