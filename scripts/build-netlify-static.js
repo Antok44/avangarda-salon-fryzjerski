@@ -58,7 +58,9 @@ ${preloadLinks}
     <link rel="icon" href="/favicon.png" type="image/png">
   </head>
   <body>
+    <div id="app"></div>
     <script type="module" src="/assets/${mainJs}"></script>
+    <script type="module" src="/assets/${routesJs}"></script>
   </body>
 </html>
 `;
