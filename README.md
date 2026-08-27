@@ -421,3 +421,25 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Deploy to Netlify
+
+This project is configured for static export to Netlify.
+
+### Option A: Drag-and-drop (fastest)
+
+1. Build the static export:
+   ```sh
+   bun run build:netlify
+   ```
+2. Open [Netlify Drop](https://app.netlify.com/drop) and drag the `dist/client` folder onto the page.
+3. Netlify will publish the site and give you a public URL.
+
+> Note: `dist/client` contains a prerendered `index.html`, hashed JS/CSS assets, original salon images, and `netlify.toml` redirects, so deep links work as a single-page app.
+
+### Option B: Connect a Git repo to Netlify
+
+1. Push this project to a GitHub/GitLab repository.
+2. In Netlify → Add new site → Import an existing project, choose the repo.
+3. Set build command to `bun run build:netlify` and publish directory to `dist/client`.
+4. Important: this project depends on the private `@lovable.dev/vite-tanstack-config` package. Netlify must be able to install it. Either keep builds inside Lovable and use drag-and-drop, or configure the private registry credentials in Netlify environment variables.
