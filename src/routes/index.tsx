@@ -121,7 +121,7 @@ function Index() {
 function HomeTab({ onServices }: { onServices: () => void }) {
   return (
     <div className="space-y-24">
-      <section className="mx-auto max-w-2xl">
+      <section className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <div>
           <p className="eyebrow">Salon Fryzjerski</p>
           <h1 className="mt-6 text-5xl leading-[1.05] text-foreground sm:text-6xl">
