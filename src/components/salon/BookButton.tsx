@@ -1,4 +1,4 @@
-import { BOOKSY_URL } from "@/data/salon";
+import { BOOKING_URL } from "@/data/salon";
 import { cn } from "@/lib/utils";
 
 export function BookButton({
@@ -12,9 +12,7 @@ export function BookButton({
 }) {
   return (
     <a
-      href={BOOKSY_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={BOOKING_URL}
       className={cn(
         "inline-flex items-center justify-center rounded-full px-7 py-3 text-xs uppercase tracking-[0.22em] transition-all duration-300",
         variant === "solid" &&

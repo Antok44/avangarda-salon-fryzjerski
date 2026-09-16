@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Facebook, MapPin, Phone, Star, Clock, Scissors, Heart, Sparkles } from "lucide-react";
+import { Facebook, Mail, Phone, Star, Clock, Scissors, Heart, Sparkles } from "lucide-react";
 
-import logoAsset from "@/assets/ava_logo.jpeg.asset.json";
 import ava1Asset from "@/assets/ava.jpeg.asset.json";
 import ava2Asset from "@/assets/ava1.jpeg.asset.json";
 import metAsset from "@/assets/ava_met.jpg.asset.json";
@@ -10,7 +9,7 @@ import met1Asset from "@/assets/ava_met1.jpg.asset.json";
 import { BookButton } from "@/components/salon/BookButton";
 import { Expandable } from "@/components/salon/Expandable";
 import {
-  ADDRESS,
+  EMAIL,
   FACEBOOK_URL,
   PHONE,
   hours,
@@ -21,17 +20,17 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Salon Fryzjerski Avangarda — Fryzjer Lubin, Cedrowa 1b" },
+      { title: "Salon Fryzjerski — Strzyżenie i koloryzacja" },
       {
         name: "description",
         content:
-          "Salon Fryzjerski Avangarda w Lubinie — koloryzacja, baleyage, Air Touch, zabiegi odbudowujące i precyzyjne strzyżenia. Ocena 4,9★. Rezerwuj online.",
+          "Salon Fryzjerski — koloryzacja, baleyage, Air Touch, zabiegi odbudowujące i precyzyjne strzyżenia. Ocena 4,9★. Zarezerwuj wizytę.",
       },
-      { property: "og:title", content: "Salon Fryzjerski Avangarda — Lubin" },
+      { property: "og:title", content: "Salon Fryzjerski" },
       {
         property: "og:description",
         content:
-          "Elegancki salon fryzjerski w Lubinie. Koloryzacja, baleyage, zabiegi pielęgnacyjne i strzyżenia damskie oraz męskie u Ani.",
+          "Elegancki salon fryzjerski. Koloryzacja, baleyage, zabiegi pielęgnacyjne oraz strzyżenia damskie i męskie.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -42,7 +41,7 @@ export const Route = createFileRoute("/")({
 
 const tabs = [
   { id: "home", label: "Start" },
-  { id: "stylist", label: "Stylistka" },
+  { id: "stylist", label: "O salonie" },
   { id: "services", label: "Usługi" },
   { id: "gallery", label: "Galeria" },
   { id: "reviews", label: "Opinie" },
@@ -79,14 +78,9 @@ function Index() {
           <button
             type="button"
             onClick={() => setTab("home")}
-            className="flex min-w-0 items-center gap-3 text-left"
+            className="flex min-w-0 items-center text-left"
           >
-            <img
-              src={logoAsset.url}
-              alt="Logo Salonu Fryzjerskiego Avangarda"
-              className="h-10 w-auto shrink-0 rounded-md"
-            />
-            <span className="sr-only">Salon Fryzjerski Avangarda</span>
+            <span className="font-display text-xl text-foreground sm:text-2xl">Salon Fryzjerski</span>
           </button>
           <BookButton className="px-5 py-2 text-[0.65rem] sm:order-2">Rezerwuj</BookButton>
           <ul className="col-span-2 -mx-4 flex gap-1 overflow-x-auto px-4 pb-1 sm:order-1 sm:mx-0 sm:overflow-visible sm:px-0 sm:pb-0">
@@ -129,17 +123,13 @@ function HomeTab({ onServices }: { onServices: () => void }) {
     <div className="space-y-24">
       <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <img
-            src={logoAsset.url}
-            alt="Logo Salonu Fryzjerskiego Avangarda"
-            className="w-64 max-w-full rounded-2xl"
-          />
-          <h1 className="mt-8 text-5xl leading-[1.05] text-foreground sm:text-6xl">
+          <p className="eyebrow">Salon Fryzjerski</p>
+          <h1 className="mt-6 text-5xl leading-[1.05] text-foreground sm:text-6xl">
             Where Every Client
             <span className="block italic text-primary">Leaves Smiling</span>
           </h1>
           <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Salon fryzjerski w Lubinie, w którym liczy się kondycja włosów, precyzja cięcia i
+            Salon fryzjerski, w którym liczy się kondycja włosów, precyzja cięcia i
             spokojna, serdeczna atmosfera. Koloryzacja, baleyage, zabiegi odbudowujące i strzyżenia
             damskie oraz męskie.
           </p>
@@ -169,14 +159,14 @@ function HomeTab({ onServices }: { onServices: () => void }) {
             <div className="card-elegant p-5">
               <dt className="eyebrow">Telefon</dt>
               <dd className="mt-2 text-lg text-foreground">{PHONE}</dd>
-              <p className="mt-1 text-xs text-muted-foreground">{ADDRESS}</p>
+              <p className="mt-1 break-all text-xs text-muted-foreground">{EMAIL}</p>
             </div>
           </dl>
         </div>
         <div className="relative">
           <img
             src={met1Asset.url}
-            alt="Metamorfoza — chłodny blond w falach po zabiegu w salonie Avangarda"
+            alt="Metamorfoza — chłodny blond w falach po zabiegu w salonie fryzjerskim"
             className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-lift"
           />
           <img
@@ -197,7 +187,7 @@ function HomeTab({ onServices }: { onServices: () => void }) {
           <p className="eyebrow">O salonie</p>
           <h2 className="mt-4 text-4xl text-foreground">Miejsce prowadzone przez kobietę, z sercem</h2>
           <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-            Avangarda to niewielki, kameralny salon przy Cedrowej 1b w Lubinie. Pracujemy na
+            To niewielki, kameralny salon fryzjerski. Pracujemy na
             profesjonalnych kosmetykach, z zachowaniem wszystkich zasad higieny i ostrożności — a
             każda usługa zaczyna się od rozmowy i szczerej diagnozy włosów. Jeśli coś włosom
             zaszkodzi, powiemy to wprost i zaproponujemy lepszą drogę.
@@ -231,9 +221,9 @@ function StylistTab() {
   return (
     <div className="space-y-16">
       <SectionHeading
-        eyebrow="Poznaj stylistkę"
-        title="Ania"
-        intro="Fryzjerka z pasją, która słucha, doradza i pracuje tak, by włosy były w coraz lepszej kondycji po każdej wizycie."
+        eyebrow="Poznaj nas"
+        title="Salon Fryzjerski"
+        intro="Miejsce tworzone z pasją, w którym słuchamy, doradzamy i pracujemy tak, by włosy były w coraz lepszej kondycji po każdej wizycie."
       />
       <div className="mx-auto max-w-3xl">
         <h3 className="text-3xl text-foreground">Specjalizacje</h3>
@@ -257,10 +247,10 @@ function StylistTab() {
           ))}
         </ul>
         <blockquote className="mt-8 border-l-2 border-primary/40 pl-5 text-sm italic leading-relaxed text-muted-foreground">
-          „Pani Ania jest przemiła, a jej podejście do klienta i precyzja w strzyżeniu – na
-          najwyższym poziomie. Fryzjerka z prawdziwą pasją.”
+          „Podejście do klienta i precyzja w strzyżeniu są na najwyższym poziomie. Widać tu
+          prawdziwą pasję.”
         </blockquote>
-        <BookButton className="mt-8">Zarezerwuj wizytę u Ani</BookButton>
+        <BookButton className="mt-8">Zarezerwuj wizytę</BookButton>
       </div>
     </div>
   );
@@ -395,10 +385,11 @@ function ContactTab() {
           </table>
           <div className="mt-8 space-y-3 text-sm">
             <p className="flex items-center gap-2 text-foreground">
-              <MapPin className="h-4 w-4 text-primary" /> {ADDRESS}
+              <Mail className="h-4 w-4 shrink-0 text-primary" />
+              <a href={`mailto:${EMAIL}`} className="break-all hover:text-primary">{EMAIL}</a>
             </p>
             <a
-              href={`tel:+48${PHONE.replace(/\s/g, "")}`}
+              href={`tel:${PHONE.replace(/\s/g, "")}`}
               className="flex items-center gap-2 text-foreground hover:text-primary"
             >
               <Phone className="h-4 w-4 text-primary" /> {PHONE}
@@ -416,8 +407,8 @@ function ContactTab() {
         </div>
         <div className="overflow-hidden rounded-[2rem] shadow-soft">
           <iframe
-            title="Mapa — Salon Fryzjerski Avangarda, Cedrowa 1b, Lubin"
-            src="https://www.google.com/maps?q=Cedrowa+1b,+59-300+Lubin&output=embed"
+            title="Mapa — Madryt, Hiszpania"
+            src="https://www.google.com/maps?q=Madrid,+Spain&output=embed"
             loading="lazy"
             className="h-full min-h-[420px] w-full border-0"
           />
@@ -435,16 +426,9 @@ function CtaBand() {
         Wybierz termin, który Ci pasuje
       </h2>
       <p className="mx-auto mt-4 max-w-md text-sm text-primary-foreground/80">
-        Rezerwacja przez Booksy zajmuje chwilę — potwierdzenie dostaniesz od razu.
+         Napisz do nas wiadomość, aby ustalić dogodny termin wizyty.
       </p>
-      <a
-        href="https://booksy.com/pl-pl/100913_salon-fryzjerski-avangarda_fryzjer_15486_lubin#ba_s=seo"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-8 inline-flex items-center justify-center rounded-full bg-background px-8 py-3 text-xs uppercase tracking-[0.22em] text-primary transition-transform duration-300 hover:-translate-y-0.5"
-      >
-        Rezerwuj
-      </a>
+      <BookButton className="mt-8 bg-background text-primary shadow-none hover:shadow-none">Rezerwuj</BookButton>
     </section>
   );
 }
@@ -454,11 +438,7 @@ function Footer() {
     <footer className="border-t border-border/70 bg-card/60">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-3 sm:px-6">
         <div>
-          <img
-            src={logoAsset.url}
-            alt="Logo Salonu Fryzjerskiego Avangarda"
-            className="w-44 rounded-xl"
-          />
+          <p className="font-display text-3xl text-foreground">Salon Fryzjerski</p>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             Salon prowadzony przez kobietę. Miejsce otwarte i przyjazne dla wszystkich — także dla
             osób LGBTQ+.
@@ -469,9 +449,11 @@ function Footer() {
         </div>
         <div className="text-sm text-muted-foreground">
           <p className="eyebrow">Kontakt</p>
-          <p className="mt-4 text-foreground">{ADDRESS}</p>
-          <a href={`tel:+48${PHONE.replace(/\s/g, "")}`} className="mt-2 block hover:text-primary">
+          <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="mt-4 block hover:text-primary">
             {PHONE}
+          </a>
+          <a href={`mailto:${EMAIL}`} className="mt-2 block break-all hover:text-primary">
+            {EMAIL}
           </a>
           <a
             href={FACEBOOK_URL}
@@ -491,7 +473,7 @@ function Footer() {
         </div>
       </div>
       <p className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Salon Fryzjerski Avangarda · Lubin
+        © {new Date().getFullYear()} Salon Fryzjerski
       </p>
     </footer>
   );
