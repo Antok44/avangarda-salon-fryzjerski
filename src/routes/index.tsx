@@ -408,7 +408,7 @@ function ContactTab() {
         <div className="overflow-hidden rounded-[2rem] shadow-soft">
           <iframe
             title="Mapa — Madryt, Hiszpania"
-            src="https://www.google.com/maps?q=Madrid,+Spain&output=embed"
+            src="https://www.google.com/maps?q=40.4167279,-3.7032905&z=11&output=embed"
             loading="lazy"
             className="h-full min-h-[420px] w-full border-0"
           />
