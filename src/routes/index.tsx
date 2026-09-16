@@ -163,7 +163,20 @@ function HomeTab({ onServices }: { onServices: () => void }) {
             </div>
           </dl>
         </div>
+        <div className="relative">
+          <img
+            src={met1Asset.url}
+            alt="Rozświetlone, falowane blond włosy — efekt metamorfozy"
+            className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-soft"
+          />
+          <img
+            src={ava1Asset.url}
+            alt="Chłodny, popielaty blond"
+            className="absolute -bottom-8 -left-6 hidden h-40 w-32 rounded-2xl border-4 border-background object-cover shadow-soft sm:block"
+          />
+        </div>
       </section>
+
 
       <section className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <img
