@@ -1,8 +1,7 @@
-export const BOOKSY_URL =
-  "https://booksy.com/pl-pl/100913_salon-fryzjerski-avangarda_fryzjer_15486_lubin#ba_s=seo";
-export const FACEBOOK_URL = "https://www.facebook.com/salonfryzjerski.annakobylanska#";
-export const PHONE = "693 873 780";
-export const ADDRESS = "Cedrowa 1b, 59-300 Lubin";
+export const BOOKING_URL = "mailto:antoni.p0lanskyy@gmail.com?subject=Rezerwacja%20wizyty";
+export const FACEBOOK_URL = "https://www.facebook.com/antek.wrzesinki?locale=pl_PL";
+export const PHONE = "+48 661 901 202";
+export const EMAIL = "antoni.p0lanskyy@gmail.com";
 
 export type Service = {
   name: string;
@@ -180,24 +179,24 @@ export const serviceGroups: ServiceGroup[] = [
 
 export const reviews = [
   {
-    name: "Ewa Chrapliwa",
+    name: "Klientka salonu",
     meta: "10 opinii · 3 zdjęcia · 10 miesięcy temu",
     text: "Jestem wieloletnią klientką salonu. Zawsze wychodzę zadowolona z wizyty. Bez względu na to czy odbywa się farbowanie włosów czy zabieg pielęgnacyjny, wszystko odbywa się z zachowaniem wszelkich środków ostrożności, na bazie profesjonalnych kosmetyków i zawsze w miłej i przyjaznej atmosferze. Polecam serdecznie.",
   },
   {
-    name: "Jolanta Hreczuch",
+    name: "Klientka salonu",
     meta: "4 opinie · 1 zdjęcie · 10 miesięcy temu",
-    text: "Wszystko na najwyższym poziomie. Pani Ania profesjonalnie i z dużym zaangażowaniem wykonuje na moich włosach farbowanie, baleyage oraz usługi nawilżające. Mój mąż jest bardzo zadowolony ze strzyżenia. TO NASZA ULUBIONA FRYZJERKA, POLECAMY…",
+    text: "Wszystko na najwyższym poziomie. Profesjonalnie i z dużym zaangażowaniem wykonywane są farbowanie, baleyage oraz usługi nawilżające. Mój mąż jest bardzo zadowolony ze strzyżenia. TO NASZ ULUBIONY SALON, POLECAMY…",
   },
   {
-    name: "Krzysztof Białas",
+    name: "Klient salonu",
     meta: "Lokalny przewodnik · 14 opinii · 26 zdjęć · 10 miesięcy temu",
-    text: "Świetny salon! Pani Ania jest przemiła, a jej podejście do klienta i precyzja w strzyżeniu – na najwyższym poziomie. Fryzjerka z prawdziwą pasją. Zawsze wysłucha i sprawi, że wychodzę z uśmiechem. Zdecydowanie polecam!",
+    text: "Świetny salon! Podejście do klienta i precyzja w strzyżeniu są na najwyższym poziomie. Widać tu prawdziwą pasję. Zawsze ktoś wysłucha i sprawi, że wychodzę z uśmiechem. Zdecydowanie polecam!",
   },
   {
-    name: "Izabela W-K",
+    name: "Klientka salonu",
     meta: "10 opinii · 9 miesięcy temu",
-    text: "Koloryzacja, jak zawsze udana. Świetny dobór produktów i fachowe doradztwo. Ścięcie także precyzyjne. Serdecznie polecam. Pani Ania zawsze znajdzie termin.",
+    text: "Koloryzacja, jak zawsze udana. Świetny dobór produktów i fachowe doradztwo. Ścięcie także precyzyjne. Serdecznie polecam. Zawsze znajdzie się dogodny termin.",
   },
 ];
 
