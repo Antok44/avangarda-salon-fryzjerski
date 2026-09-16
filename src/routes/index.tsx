@@ -121,7 +121,7 @@ function Index() {
 function HomeTab({ onServices }: { onServices: () => void }) {
   return (
     <div className="space-y-24">
-      <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="mx-auto max-w-2xl">
         <div>
           <p className="eyebrow">Salon Fryzjerski</p>
           <h1 className="mt-6 text-5xl leading-[1.05] text-foreground sm:text-6xl">
@@ -162,18 +162,6 @@ function HomeTab({ onServices }: { onServices: () => void }) {
               <p className="mt-1 break-all text-xs text-muted-foreground">{EMAIL}</p>
             </div>
           </dl>
-        </div>
-        <div className="relative">
-          <img
-            src={met1Asset.url}
-            alt="Metamorfoza — chłodny blond w falach po zabiegu w salonie fryzjerskim"
-            className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-lift"
-          />
-          <img
-            src={ava1Asset.url}
-            alt="Popielaty blond z delikatnymi falami"
-            className="absolute -bottom-8 -left-6 hidden w-40 rounded-2xl border-4 border-background object-cover shadow-soft sm:block"
-          />
         </div>
       </section>
 
